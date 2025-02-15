@@ -4,6 +4,8 @@ services:
   heimdall:
     image: linuxserver/heimdall:latest
     container_name: heimdall
+    networks:
+      - proxy
     environment:
       - PUID=1000
       - PGID=1000
@@ -11,6 +13,11 @@ services:
     volumes:
       - heimdall_data:/config
     restart: always
+
+networks:
+  proxy:
+    external: true
+    name: docker_default
 
 volumes:
   heimdall_data:
